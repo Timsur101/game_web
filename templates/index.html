@@ -4,7 +4,7 @@
     {% if weekly_news %}
     <div class="weekly-feature mb-5">
         <div class="card bg-dark text-white">
-            {% if weekly_news[2] %}  <!-- Проверяем наличие image_path -->
+            {% if weekly_news[2] %}  
             <img src="{{ url_for('static', filename=weekly_news[2]) }}" 
                  class="card-img-top"
                  alt="{{ weekly_news[0] }}"
@@ -21,7 +21,6 @@
     </div>
     {% endif %}
 
-    <!-- Остальной код без изменений -->
     <h2 class="mb-4">Последние новости</h2>
     <div class="row">
         {% for news in regular_news %}

@@ -24,7 +24,6 @@ def admin_required(f):
 def index():
     cur = mysql.connection.cursor()
     
-    # Новость недели (теперь включая image_path)
     cur.execute('''
         SELECT n.title, n.content, n.image_path, 
                g.title as game_name, u.username
@@ -35,8 +34,7 @@ def index():
         LIMIT 1
     ''')
     weekly_news = cur.fetchone()
-    
-    # Обычные новости (без изменений)
+
     cur.execute('''
         SELECT n.title, n.content, g.title as game_name, u.username
         FROM news n
