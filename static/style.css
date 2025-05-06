@@ -1,0 +1,123 @@
+/* Основные стили */
+body {
+    background-color: #f8f9fa;
+    padding-top: 20px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #333;
+}
+
+.navbar {
+    margin-bottom: 30px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    background-color: #343a40 !important;
+}
+
+.navbar-brand img {
+    transition: opacity 0.3s ease;
+}
+
+.navbar-brand img:hover {
+    opacity: 0.8;
+}
+
+/* Карточки новостей */
+.card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: none;
+    border-radius: 0.5rem;
+    overflow: hidden;
+    margin-bottom: 20px;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+}
+
+.card-body {
+    padding: 1.5rem;
+}
+
+.card-title {
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+    color: #2c3e50;
+}
+
+.card-subtitle {
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+    color: #7f8c8d !important;
+}
+
+/* Новость недели */
+.weekly-feature {
+    border-radius: 0.5rem;
+    overflow: hidden;
+    margin-bottom: 40px;
+}
+
+.weekly-feature .badge {
+    font-size: 0.9rem;
+    padding: 0.5rem 1rem;
+    background-color: #3498db !important;
+    margin-bottom: 1rem;
+    display: inline-block;
+}
+
+.weekly-feature .card-title {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+
+/* Адаптивные изображения */
+.img-fluid {
+    max-width: 100%;
+    height: auto;
+    object-fit: cover;
+}
+
+/* Оповещения */
+.alert {
+    border-radius: 0.5rem;
+    padding: 1rem 1.25rem;
+}
+
+.alert-info {
+    background-color: #e8f4fd;
+    border-color: #b8daf8;
+    color: #31708f;
+}
+
+/* Кнопки и ссылки */
+.btn-primary {
+    background-color: #3498db;
+    border-color: #3498db;
+    padding: 0.5rem 1.5rem;
+    border-radius: 0.3rem;
+}
+
+.btn-primary:hover {
+    background-color: #2980b9;
+    border-color: #2980b9;
+}
+
+.alert-link {
+    color: #1a5276;
+    font-weight: 600;
+}
+
+/* Мобильная адаптация */
+@media (max-width: 768px) {
+    .weekly-feature .card-title {
+        font-size: 1.5rem;
+    }
+    
+    .navbar-nav {
+        padding-top: 1rem;
+    }
+    
+    .card {
+        margin-bottom: 15px;
+    }
+}

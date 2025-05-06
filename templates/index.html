@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block content %}
+    {% if weekly_news %}
+    <div class="weekly-feature mb-5">
+        <div class="card bg-dark text-white">
+            {% if weekly_news[2] %}  <!-- Проверяем наличие image_path -->
+            <img src="{{ url_for('static', filename=weekly_news[2]) }}" 
+                 class="card-img-top"
+                 alt="{{ weekly_news[0] }}"
+                 style="max-height: 400px; object-fit: cover;">
+            {% endif %}
+            <div class="card-body">
+                <div class="badge bg-primary mb-2">Новость недели</div>
+                <h2>{{ weekly_news[0] }}</h2>
+                <p><strong>Игра:</strong> {{ weekly_news[3] }}</p>
+                <p>{{ weekly_news[1] }}</p>
+                <p><small>Автор: {{ weekly_news[4] }}</small></p>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+
+    <!-- Остальной код без изменений -->
+    <h2 class="mb-4">Последние новости</h2>
+    <div class="row">
+        {% for news in regular_news %}
+        <div class="col-md-6 mb-4">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h5>{{ news[0] }}</h5>
+                    <h6 class="text-muted">{{ news[2] }}</h6>
+                    <p>{{ news[1] }}</p>
+                    <small class="text-muted">Автор: {{ news[3] }}</small>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+{% endblock %}

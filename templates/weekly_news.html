@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <h1>Назначить новость недели</h1>
+    
+    {% if current_weekly %}
+    <div class="card mb-4">
+        <div class="card-body">
+            <h3>Текущая новость недели:</h3>
+            <p><strong>{{ current_weekly[1] }}</strong> ({{ current_weekly[3] }})</p>
+            {% if current_weekly[2] %}
+            <img src="{{ url_for('static', filename=current_weekly[2]) }}" 
+                 class="img-fluid mb-3"
+                 style="max-height: 200px;">
+            {% endif %}
+        </div>
+    </div>
+    {% endif %}
+
+    <form method="POST" enctype="multipart/form-data">
+        <div class="mb-3">
+            <label class="form-label">Выберите новость:</label>
+            <select name="news_id" class="form-select" required>
+                {% for news in news_list %}
+                <option value="{{ news[0] }}">{{ news[1] }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        
+        <div class="mb-3">
+            <label class="form-label">Загрузите обложку (необязательно):</label>
+            <input type="file" name="weekly_image" class="form-control" accept="image/*">
+        </div>
+        
+        <button type="submit" class="btn btn-primary">Сохранить</button>
+    </form>
+</div>
+{% endblock %}
