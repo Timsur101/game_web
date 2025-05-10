@@ -24,6 +24,7 @@
                         <a class="nav-link" href="{{ url_for('add_news') }}">Добавить новость</a>
                         <a class="nav-link" href="{{ url_for('weekly_news') }}">Новость недели</a>
                     {% endif %}
+                    <a class="nav-link" href="{{ url_for('profile') }}">Профиль</a>
                     <span class="navbar-text mx-3">Привет, {{ session['username'] }}!</span>
                     <a class="nav-link" href="{{ url_for('logout') }}">Выход</a>
                 {% endif %}

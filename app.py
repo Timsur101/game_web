@@ -4,6 +4,7 @@ from werkzeug.utils import secure_filename
 from functools import wraps
 import os
 from config import Config
+import MySQLdb.cursors  
 
 app = Flask(__name__)
 app.config.from_object(Config)
@@ -167,6 +168,45 @@ def weekly_news():
     return render_template('weekly_news.html',
                          news_list=news_list,
                          current_weekly=current_weekly)
+
+@app.route('/profile', methods=['GET', 'POST'])
+def profile():
+    if 'user_id' not in session:
+        return redirect(url_for('login'))
+    
+    cur = mysql.connection.cursor(cursorclass=MySQLdb.cursors.DictCursor)  
+    
+    cur.execute('SELECT id_user, username, email FROM users WHERE id_user = %s', (session['user_id'],))
+    user = cur.fetchone()
+    
+    if request.method == 'POST':
+        username = request.form['name']
+        email = request.form['email']
+        password = request.form['password']
+        
+        if not username or not email:
+            flash('Имя и email обязательны', 'error')
+        elif '@' not in email or '.' not in email:
+            flash('Неверный формат email', 'error')
+        else:
+            try:
+                if password:
+                    cur.execute('UPDATE users SET username = %s, email = %s, password = %s WHERE id_user = %s',
+                              (username, email, password, session['user_id']))
+                else:
+                    cur.execute('UPDATE users SET username = %s, email = %s WHERE id_user = %s',
+                              (username, email, session['user_id']))
+                mysql.connection.commit()
+                flash('Профиль успешно обновлен', 'success')
+            except Exception as e:
+                mysql.connection.rollback()
+                flash(f'Ошибка при обновлении профиля: {str(e)}', 'error')
+            finally:
+                cur.close()
+                return redirect(url_for('profile'))
+    
+    cur.close()
+    return render_template('profile.html', user=user)
 
 @app.route('/logout')
 def logout():
